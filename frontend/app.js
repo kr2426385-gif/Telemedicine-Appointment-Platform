@@ -1,4 +1,4 @@
-const backendUrl = 'http://localhost:5000';
+const backendUrl = 'https://telemedicine-appointment-platform.onrender.com';
 const views = document.querySelectorAll('.view');
 const userInfo = document.getElementById('user-info');
 const navHome = document.getElementById('nav-home');
