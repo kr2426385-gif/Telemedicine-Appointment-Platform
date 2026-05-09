@@ -224,14 +224,21 @@ function getAuthHeaders() {
 async function apiRequest(path, options = {}) {
   let response;
   const apiUrl = `${backendUrl.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+  const method = options.method || 'GET';
+  const headers = {
+    ...getAuthHeaders(),
+    ...options.headers
+  };
+
+  if (method !== 'GET' || options.body) {
+    headers['Content-Type'] = 'application/json';
+  }
+
   try {
     response = await fetch(apiUrl, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...getAuthHeaders(),
-        ...options.headers
-      },
-      ...options
+      ...options,
+      method,
+      headers,
     });
   } catch (error) {
     throw new Error(`Cannot connect to backend at ${apiUrl}. Check your internet or backend status.`);
