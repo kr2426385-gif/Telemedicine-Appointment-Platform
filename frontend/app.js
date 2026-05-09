@@ -1,4 +1,4 @@
-const backendUrl = "https://telemedicine-appointment-platform-fj5ln2zyg.vercel.app";
+const backendUrl = 'https://telemedicine-appointment-platform.vercel.app/';
 const views = document.querySelectorAll('.view');
 const userInfo = document.getElementById('user-info');
 const navHome = document.getElementById('nav-home');
@@ -231,7 +231,7 @@ async function apiRequest(path, options = {}) {
       ...options
     });
   } catch (error) {
-    throw new Error('Cannot connect to backend. Please make sure the backend is running on http://localhost:5000.');
+    throw new Error(`Cannot connect to backend at ${backendUrl}. Check your internet or backend status.`);
   }
 
   if (!response.ok) {
