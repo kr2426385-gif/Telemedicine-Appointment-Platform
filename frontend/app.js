@@ -1,4 +1,6 @@
-const backendUrl = 'https://telemedicine-appointment-platform.vercel.app/';
+const backendUrl = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://telemedicine-appointment-platform.vercel.app';
 const views = document.querySelectorAll('.view');
 const userInfo = document.getElementById('user-info');
 const navHome = document.getElementById('nav-home');
@@ -221,8 +223,9 @@ function getAuthHeaders() {
 
 async function apiRequest(path, options = {}) {
   let response;
+  const apiUrl = `${backendUrl.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
   try {
-    response = await fetch(`${backendUrl}${path}`, {
+    response = await fetch(apiUrl, {
       headers: {
         'Content-Type': 'application/json',
         ...getAuthHeaders(),
@@ -231,7 +234,7 @@ async function apiRequest(path, options = {}) {
       ...options
     });
   } catch (error) {
-    throw new Error(`Cannot connect to backend at ${backendUrl}. Check your internet or backend status.`);
+    throw new Error(`Cannot connect to backend at ${apiUrl}. Check your internet or backend status.`);
   }
 
   if (!response.ok) {
