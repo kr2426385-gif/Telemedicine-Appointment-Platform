@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediConnect Care Console</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">+</span>
+        <div>
+          <strong>MediConnect</strong>
+          <small>Appointments</small>
+        </div>
+      </div>
+      <nav>
+        <button id="nav-home">Dashboard</button>
+        <button id="nav-doctors">Doctors</button>
+        <button id="nav-appointments">Appointments</button>
+        <button id="nav-prescriptions">Prescriptions</button>
+        <button id="nav-billing">Payments</button>
+        <button id="nav-messages">Messages</button>
+        <button id="nav-auth">Login / Register</button>
+      </nav>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Appointments</p>
+          <h2>Care Console</h2>
+        </div>
+        <div id="user-info"></div>
+      </header>
+
+      <main>
+        <section id="home-view" class="view active">
+          <div class="dashboard-grid">
+            <div class="welcome-panel">
+              <div>
+                <p class="eyebrow">Dashboard</p>
+                <h1>Welcome back.</h1>
+                <div class="hero-actions">
+                  <button id="home-book-doctor" class="primary-btn">Find Doctor</button>
+                  <button id="home-view-appointments" class="secondary">View Appointments</button>
+                </div>
+              </div>
+              <img src="assets/telemedicine-hero.png" alt="Telemedicine dashboard" />
+            </div>
+
+            <div class="side-summary">
+              <h3>Today</h3>
+              <div class="summary-item">
+                <span>Care network</span>
+                <strong>3</strong>
+              </div>
+              <div class="summary-item">
+                <span>Clinical modules</span>
+                <strong>6</strong>
+              </div>
+              <div class="summary-item">
+                <span>Platform status</span>
+                <strong>Online</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-cards">
+            <div class="card feature-card">
+              <span class="feature-icon">DR</span>
+              <h3>Doctors</h3>
+              <p>Find and book providers.</p>
+            </div>
+            <div class="card feature-card">
+              <span class="feature-icon">RX</span>
+              <h3>Prescriptions</h3>
+              <p>Review care notes.</p>
+            </div>
+            <div class="card feature-card">
+              <span class="feature-icon">IN</span>
+              <h3>Payments</h3>
+              <p>Pay consultation invoices.</p>
+            </div>
+          </div>
+
+          <div class="module-grid">
+            <button data-module="doctors-view">Browse Doctors</button>
+            <button data-module="appointments-view">My Appointments</button>
+            <button data-module="prescriptions-view">Prescriptions</button>
+            <button data-module="billing-view">Payments</button>
+            <button data-module="messages-view">Messages</button>
+            <button data-module="auth-view">Account</button>
+          </div>
+        </section>
+
+        <section id="doctors-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Directory</p>
+            <h1>Doctors</h1>
+          </div>
+          <div class="search-row">
+            <input id="doctor-specialty" placeholder="Filter by specialty" />
+            <input id="doctor-location" placeholder="Filter by location" />
+            <button id="doctor-search">Search</button>
+            <button id="doctor-refresh" class="secondary">Refresh</button>
+          </div>
+          <div id="doctor-profile-panel"></div>
+          <div id="doctors-list" class="list"></div>
+        </section>
+
+        <section id="appointments-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Schedule</p>
+            <h1>My Appointments</h1>
+          </div>
+          <div id="appointment-actions"></div>
+          <div id="appointments-list" class="list"></div>
+        </section>
+
+        <section id="prescriptions-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Records</p>
+            <h1>Prescriptions</h1>
+          </div>
+          <div id="prescription-actions"></div>
+          <div id="prescriptions-list" class="list"></div>
+        </section>
+
+        <section id="billing-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Payments</p>
+            <h1>Payment Center</h1>
+          </div>
+          <div id="billing-actions"></div>
+          <div id="billing-list" class="list"></div>
+        </section>
+
+        <section id="messages-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Inbox</p>
+            <h1>Messages</h1>
+          </div>
+          <form id="message-form" class="tool-form">
+            <select id="message-receiver" required></select>
+            <textarea id="message-content" placeholder="Write your message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <div id="messages-list" class="list"></div>
+        </section>
+
+        <section id="auth-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Access</p>
+            <h1>Account</h1>
+          </div>
+          <div class="auth-box">
+            <div class="auth-tabs">
+              <button id="show-login" class="active">Login</button>
+              <button id="show-register">Register</button>
+            </div>
+            <form id="login-form" class="auth-form active">
+              <h2>Login</h2>
+              <label>Email <input type="email" id="login-email" required /></label>
+              <label>Password <input type="password" id="login-password" required /></label>
+              <button type="submit">Login</button>
+            </form>
+            <form id="register-form" class="auth-form">
+              <h2>Register</h2>
+              <label>Name <input type="text" id="register-name" required /></label>
+              <label>Email <input type="email" id="register-email" required /></label>
+              <label>Password <input type="password" id="register-password" required /></label>
+              <label>Role
+                <select id="register-role">
+                  <option value="patient">Patient</option>
+                  <option value="doctor">Doctor</option>
+                </select>
+              </label>
+              <button type="submit">Register</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="booking-view" class="view">
+          <div class="page-title">
+            <p class="eyebrow">Request</p>
+            <h1>Book an Appointment</h1>
+          </div>
+          <div id="booking-box">
+            <p>Select a doctor from the doctors page first, then click "Book Appointment".</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>System Status: <span>All Good</span></p>
+        <div class="footer-links">
+          <strong>&copy;2026 MediConnect Care Console</strong>
+          <a href="#" data-module="home-view">Status</a>
+          <a href="#" data-module="doctors-view">Doctors</a>
+          <a href="#" data-module="appointments-view">Appointments</a>
+          <a href="#" data-module="messages-view">Contact</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
