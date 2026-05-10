@@ -10,7 +10,16 @@ const apiRoutes = require('./routes');
 
 const app = express();
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://telemedicine-flame-rho.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
+}));
+app.options('*', cors());
 app.use(express.json({ limit: '10kb' }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '..', 'public')));

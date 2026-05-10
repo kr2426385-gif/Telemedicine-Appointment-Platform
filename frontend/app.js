@@ -1,4 +1,6 @@
-const backendUrl = 'http://localhost:5000';
+const backendUrl = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://telemedicine-backend-bice.vercel.app/';
 const views = document.querySelectorAll('.view');
 const userInfo = document.getElementById('user-info');
 const navHome = document.getElementById('nav-home');
