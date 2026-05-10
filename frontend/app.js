@@ -1,6 +1,4 @@
-const backendUrl = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000'
-  : 'https://telemedicine-appointment-platform.vercel.app';
+const backendUrl = 'http://localhost:5000';
 const views = document.querySelectorAll('.view');
 const userInfo = document.getElementById('user-info');
 const navHome = document.getElementById('nav-home');

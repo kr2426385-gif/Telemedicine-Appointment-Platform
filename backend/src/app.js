@@ -9,38 +9,8 @@ const errorHandler = require('./middleware/errorHandler');
 const apiRoutes = require('./routes');
 
 const app = express();
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://telemedicine-appointment-platform-hlg9-37gpvwyun.vercel.app',
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '',
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
-function isAllowedOrigin(origin) {
-  if (!origin || allowedOrigins.includes(origin)) return true;
-
-  try {
-    const { hostname } = new URL(origin);
-    return hostname.endsWith('.vercel.app');
-  } catch (error) {
-    return false;
-  }
-}
-
 app.use(helmet());
-const corsOptions = {
-  origin(origin, callback) {
-    if (isAllowedOrigin(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Not allowed by CORS'));
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  optionsSuccessStatus: 204
-};
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(cors());
 app.use(express.json({ limit: '10kb' }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
